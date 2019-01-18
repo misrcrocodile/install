@@ -63,12 +63,14 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 		echo "   2) Revoke an existing user"
 		echo "   3) Remove OpenVPN"
 		echo "   4) Exit"
+		#read -p "Select an option [1-4]: " option
 		option = 1
 		case $option in
 			1) 
 			echo
 			echo "Tell me a name for the client certificate."
 			echo "Please, use one word only, no special characters."
+			#read -p "Client name: " -e CLIENT
 			CLIENT = misr
 			cd /etc/openvpn/easy-rsa/
 			EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $CLIENT nopass
@@ -189,6 +191,7 @@ else
 	echo "Which protocol do you want for OpenVPN connections?"
 	echo "   1) UDP (recommended)"
 	echo "   2) TCP"
+	#read -p "Protocol [1-2]: " -e -i 1 PROTOCOL
 	PROTOCOL = 1
 	case $PROTOCOL in
 		1) 
@@ -200,7 +203,8 @@ else
 	esac
 	echo
 	echo "What port do you want OpenVPN listening to?"
-	read -p "Port: " -e -i 1194 PORT
+	#read -p "Port: " -e -i 1194 PORT
+	PORT = 1194
 	echo
 	echo "Which DNS do you want to use with the VPN?"
 	echo "   1) Current system resolvers"
@@ -208,14 +212,16 @@ else
 	echo "   3) Google"
 	echo "   4) OpenDNS"
 	echo "   5) Verisign"
+	#read -p "DNS [1-5]: " -e -i 1 DNS
 	DNS = 3
 	echo
 	echo "Finally, tell me your name for the client certificate."
 	echo "Please, use one word only, no special characters."
-	read -p "Client name: " -e -i client CLIENT
+	#read -p "Client name: " -e -i client CLIENT
+	CLIENT = misr
 	echo
 	echo "Okay, that was all I needed. We are ready to set up your OpenVPN server now."
-	read -n1 -r -p "Press any key to continue..."
+	#read -n1 -r -p "Press any key to continue..."
 	if [[ "$OS" = 'debian' ]]; then
 		apt-get update
 		apt-get install openvpn iptables openssl ca-certificates -y
