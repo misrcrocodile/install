@@ -10,7 +10,7 @@ cd installNodejsTemp
 PROCESS_TYPE=$(uname -m)
 NODEJS_LINK='https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-x64.tar.xz'
 
-if [[ $PROCESS_TYPE = armv6.* ]]; then
+if [[ $PROCESS_TYPE = armv6* ]]; then
   NODEJS_LINK='https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.xz'
 fi
 
